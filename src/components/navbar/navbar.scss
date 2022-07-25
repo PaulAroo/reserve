@@ -1,0 +1,46 @@
+@use "../../variables" as v;
+
+.navbar {
+  padding: 1rem 0.2rem;
+  background-color: v.$blue-violet-crayola;
+}
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  .icon {
+    color: v.$palatinate-purple;
+    width: 2rem;
+    height: 2rem;
+  }
+  span {
+    color: v.$palatinate-purple;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  button {
+    border: none;
+    border-radius: 4px;
+    padding-inline: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:active {
+      background-color: darken(gray, 0.1%);
+      transform: translateY(2px);
+    }
+  }
+}
