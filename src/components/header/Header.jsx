@@ -1,8 +1,10 @@
+import { format } from "date-fns";
 import React, { useState } from "react";
-import "./header.scss";
-import { BsFillPersonFill } from "react-icons/bs";
-import { FaRoad, FaRegCalendarAlt } from "react-icons/fa";
 import { DateRange } from "react-date-range";
+import { FaRoad, FaRegCalendarAlt } from "react-icons/fa";
+import { BsFillPersonFill, BsChevronExpand } from "react-icons/bs";
+
+import "./header.scss";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
@@ -11,10 +13,51 @@ function Header() {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: null,
+      endDate: new Date(),
       key: "selection",
     },
   ]);
+  const [showOptions, setShowOptions] = useState(false);
+  const [options, setOptions] = useState({
+    adults: 1,
+    children: 0,
+    rooms: 1,
+  });
+
+  const renderOccupantString = () => {
+    const { adults, children, rooms } = options;
+    return `${adults} adult${adults > 1 ? "s" : ""} • ${children} ${
+      children === 1 ? "child" : "children"
+    } • ${rooms} room${rooms > 1 ? "s" : ""}`;
+  };
+
+  const incrementAdultCount = () => {
+    const newAdultCount = options.adults + 1;
+    setOptions((prev) => ({ ...prev, adults: newAdultCount }));
+  };
+  const decrementAdultCount = () => {
+    const newAdultCount = options.adults - 1;
+    setOptions((prev) => ({ ...prev, adults: newAdultCount }));
+  };
+
+  const incrementChildrenCount = () => {
+    const newChildrenCount = options.children + 1;
+    setOptions((prev) => ({ ...prev, children: newChildrenCount }));
+  };
+  const decrementChildrenCount = () => {
+    const newChildrenCount = options.children - 1;
+    setOptions((prev) => ({ ...prev, children: newChildrenCount }));
+  };
+
+  const incrementRoomCount = () => {
+    const newRoomCount = options.rooms + 1;
+    setOptions((prev) => ({ ...prev, rooms: newRoomCount }));
+  };
+  const decrementRoomCount = () => {
+    const newRoomCount = options.rooms - 1;
+    setOptions((prev) => ({ ...prev, rooms: newRoomCount }));
+  };
+
   return (
     <div className="header">
       <div className="header__container">
@@ -29,17 +72,21 @@ function Header() {
               className="search__input"
             />
           </div>
-          <div className="date">
+          <div className="date" onClick={() => setShowDateRange(true)}>
             <FaRegCalendarAlt />
-            <span onClick={() => setShowDateRange(true)}>
+            <span>
               {" "}
-              Check-in - Check-out
+              {format(date[0].startDate, "dd/MM/yyyy")} -{" "}
+              {format(date[0].endDate, "dd/MM/yyyy")}
             </span>
             {showDateRange && (
               <>
                 <div
                   className="blanket"
-                  onClick={() => setShowDateRange(false)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowDateRange(false);
+                  }}
                 />
                 <DateRange
                   editableDateInputs={true}
@@ -51,9 +98,67 @@ function Header() {
               </>
             )}
           </div>
-          <div className="occupants">
+          <div
+            className="occupants"
+            onClick={() => {
+              setShowOptions(true);
+            }}
+          >
             <BsFillPersonFill />
-            <span>1 adult - 0 children - 1 room</span>
+            <span>{renderOccupantString()}</span>
+            <BsChevronExpand className="chevrons" />
+            {showOptions && (
+              <>
+                <div
+                  className="blanket"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowOptions(false);
+                  }}
+                />
+                <div className="options__menu">
+                  <div className="option__item">
+                    <p>Adult</p>
+                    <div>
+                      <button
+                        onClick={decrementAdultCount}
+                        disabled={options.adults < 2}
+                      >
+                        -
+                      </button>
+                      <span>{options.adults}</span>
+                      <button onClick={incrementAdultCount}>+</button>
+                    </div>
+                  </div>
+                  <div className="option__item">
+                    <p>Children</p>
+                    <div>
+                      <button
+                        onClick={decrementChildrenCount}
+                        disabled={options.children === 0}
+                      >
+                        -
+                      </button>
+                      <span>{options.children}</span>
+                      <button onClick={incrementChildrenCount}>+</button>
+                    </div>
+                  </div>
+                  <div className="option__item">
+                    <p>Room</p>
+                    <div>
+                      <button
+                        onClick={decrementRoomCount}
+                        disabled={options.rooms < 2}
+                      >
+                        -
+                      </button>
+                      <span>{options.rooms}</span>
+                      <button onClick={incrementRoomCount}>+</button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <button>Search</button>
         </div>
