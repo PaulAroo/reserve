@@ -31,31 +31,11 @@ function Header() {
     } • ${rooms} room${rooms > 1 ? "s" : ""}`;
   };
 
-  const incrementAdultCount = () => {
-    const newAdultCount = options.adults + 1;
-    setOptions((prev) => ({ ...prev, adults: newAdultCount }));
-  };
-  const decrementAdultCount = () => {
-    const newAdultCount = options.adults - 1;
-    setOptions((prev) => ({ ...prev, adults: newAdultCount }));
-  };
-
-  const incrementChildrenCount = () => {
-    const newChildrenCount = options.children + 1;
-    setOptions((prev) => ({ ...prev, children: newChildrenCount }));
-  };
-  const decrementChildrenCount = () => {
-    const newChildrenCount = options.children - 1;
-    setOptions((prev) => ({ ...prev, children: newChildrenCount }));
-  };
-
-  const incrementRoomCount = () => {
-    const newRoomCount = options.rooms + 1;
-    setOptions((prev) => ({ ...prev, rooms: newRoomCount }));
-  };
-  const decrementRoomCount = () => {
-    const newRoomCount = options.rooms - 1;
-    setOptions((prev) => ({ ...prev, rooms: newRoomCount }));
+  const handleOption = (name, operation) => {
+    setOptions((prev) => ({
+      ...prev,
+      [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+    }));
   };
 
   return (
@@ -121,39 +101,45 @@ function Header() {
                     <p>Adult</p>
                     <div>
                       <button
-                        onClick={decrementAdultCount}
+                        onClick={() => handleOption("adults", "d")}
                         disabled={options.adults < 2}
                       >
                         -
                       </button>
                       <span>{options.adults}</span>
-                      <button onClick={incrementAdultCount}>+</button>
+                      <button onClick={() => handleOption("adults", "i")}>
+                        +
+                      </button>
                     </div>
                   </div>
                   <div className="option__item">
                     <p>Children</p>
                     <div>
                       <button
-                        onClick={decrementChildrenCount}
+                        onClick={() => handleOption("children", "d")}
                         disabled={options.children === 0}
                       >
                         -
                       </button>
                       <span>{options.children}</span>
-                      <button onClick={incrementChildrenCount}>+</button>
+                      <button onClick={() => handleOption("children", "i")}>
+                        +
+                      </button>
                     </div>
                   </div>
                   <div className="option__item">
                     <p>Room</p>
                     <div>
                       <button
-                        onClick={decrementRoomCount}
+                        onClick={() => handleOption("rooms", "d")}
                         disabled={options.rooms < 2}
                       >
                         -
                       </button>
                       <span>{options.rooms}</span>
-                      <button onClick={incrementRoomCount}>+</button>
+                      <button onClick={() => handleOption("rooms", "i")}>
+                        +
+                      </button>
                     </div>
                   </div>
                 </div>

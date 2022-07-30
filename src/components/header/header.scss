@@ -90,6 +90,9 @@
 
       button {
         cursor: pointer;
+        &:disabled {
+          cursor: not-allowed;
+        }
       }
 
       .option__item {
