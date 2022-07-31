@@ -7,8 +7,11 @@ import { BsFillPersonFill, BsChevronExpand } from "react-icons/bs";
 import "./header.scss";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+  const [destination, setDestination] = useState("");
   const [showDateRange, setShowDateRange] = useState(false);
   const [date, setDate] = useState([
     {
@@ -38,6 +41,10 @@ function Header() {
     }));
   };
 
+  const handleSearch = () => {
+    navigate("/hotels", { state: { destination, date, options } });
+  };
+
   return (
     <div className="header">
       <div className="header__container">
@@ -50,6 +57,7 @@ function Header() {
               type="text"
               placeholder="where are you going?"
               className="search__input"
+              onChange={(e) => setDestination(e.target.value)}
             />
           </div>
           <div className="date" onClick={() => setShowDateRange(true)}>
@@ -74,6 +82,7 @@ function Header() {
                   moveRangeOnFirstSelection={false}
                   ranges={date}
                   className="date__range"
+                  minDate={new Date()}
                 />
               </>
             )}
@@ -146,7 +155,7 @@ function Header() {
               </>
             )}
           </div>
-          <button>Search</button>
+          <button onClick={handleSearch}>Search</button>
         </div>
       </div>
     </div>

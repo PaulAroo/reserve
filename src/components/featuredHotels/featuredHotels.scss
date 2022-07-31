@@ -1,0 +1,16 @@
+.featured_hotels {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  // padding-top: 2rem;
+  gap: 1.2em;
+}
+
+.fh__item {
+  .details {
+    .review {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+}
