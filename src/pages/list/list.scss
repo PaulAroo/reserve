@@ -9,6 +9,7 @@
     margin: 0 auto;
     display: flex;
     gap: 1.5rem;
+    position: relative;
 
     .search {
       border: 1px solid v.$dark-sky-blue;
@@ -17,6 +18,9 @@
       display: grid;
       gap: 1rem;
       padding: 0.5rem;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
       // background-color: v.$blue-violet-crayola;
 
       > label {
@@ -27,9 +31,13 @@
       .ckeckIn {
         display: flex;
         flex-direction: column;
-        span {
+        > span {
           border: 1px solid;
           padding: 0.2rem;
+        }
+
+        .date__range {
+          z-index: 12;
         }
       }
 
@@ -52,7 +60,9 @@
 
     .results {
       flex: 0.7;
-      background-color: v.$dark-sky-blue;
+      // background-color: v.$dark-sky-blue;
+      display: grid;
+      gap: 1rem;
     }
   }
 }

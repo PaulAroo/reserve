@@ -1,0 +1,5 @@
+.result__item {
+  display: grid;
+  border: 1px solid lightgrey;
+  grid-template-columns: 1fr 1.5fr 0.8fr;
+}
