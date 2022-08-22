@@ -1,7 +1,7 @@
 import React from "react";
 import "./resultItem.scss";
 
-function ResultItem() {
+function ResultItem({ item }) {
   return (
     <div className="result__item">
       <div className="image">
@@ -11,16 +11,18 @@ function ResultItem() {
         />
       </div>
       <div className="desc">
-        <h1>WaterCress Hotels</h1>
-        <p className="area">500m from center</p>
+        <h1>{item.name}</h1>
+        <p className="area">{item.distance}</p>
         <strong>Studio apartment with Air Conditioning</strong>
         <p>1 bathroom • 21m² 1 full bed</p>
       </div>
       <div className="details">
-        <div className="review">
-          Very good <span>8.9</span>
-        </div>
-        <span className="price"></span>
+        {item.rating && (
+          <div className="review">
+            Very good <span>8.9</span>
+          </div>
+        )}
+        <span className="price">{item.cheapestPrice}</span>
         <p>including taxes and fees</p>
         <button>See Availabilty</button>
       </div>

@@ -31,6 +31,8 @@
       .ckeckIn {
         display: flex;
         flex-direction: column;
+        position: relative;
+
         > span {
           border: 1px solid;
           padding: 0.2rem;
@@ -38,6 +40,10 @@
 
         .date__range {
           z-index: 12;
+          position: absolute;
+          top: 100%;
+          box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
+          left: -5%;
         }
       }
 

@@ -6,6 +6,7 @@ import { DateRange } from "react-date-range";
 import "./list.scss";
 import Navbar from "../../components/navbar/Navbar";
 import ResultItem from "../../components/resultItem/ResultItem";
+import useFetch from "../../customHooks/useFetch";
 
 function List() {
   const location = useLocation();
@@ -23,6 +24,8 @@ function List() {
       key: "option",
     },
   ]);
+  const [min, setMin] = useState(1);
+  const [max, setMax] = useState(999);
 
   useEffect(() => {
     if (location.state) {
@@ -31,6 +34,12 @@ function List() {
       setDate(location.state.date);
     }
   }, []);
+
+  const { data, loading, reFetch } = useFetch(
+    `/hotels?city=${destination}&min=${min}&max=${max}`
+  );
+
+  const handleSearch = () => reFetch();
 
   return (
     <div className="list">
@@ -42,6 +51,7 @@ function List() {
             <label htmlFor="destination">
               Destination
               <input
+                onChange={(e) => setDestination(e.target.value)}
                 type="text"
                 placeholder="lagos"
                 id="destination"
@@ -83,13 +93,23 @@ function List() {
                 <label htmlFor="min_price">
                   Min price <small>(per night)</small>
                 </label>
-                <input type="number" id="min_price" />
+                <input
+                  onChange={(e) => setMin(e.target.value)}
+                  type="number"
+                  id="min_price"
+                  value={min}
+                />
               </div>
               <div>
                 <label htmlFor="max_price">
                   Max price <small>(per night)</small>
                 </label>
-                <input type="number" id="max_price" />
+                <input
+                  onChange={(e) => setMax(e.target.value)}
+                  type="number"
+                  id="max_price"
+                  value={max}
+                />
               </div>
               <div>
                 <label htmlFor="adult">Adult</label>
@@ -114,16 +134,21 @@ function List() {
                 <input type="number" min="1" id="room" value={options.rooms} />
               </div>
             </div>
-            <button>search</button>
+            <button onClick={handleSearch}>search</button>
           </div>
           <div className="results">
+            {loading ? (
+              <div>loading</div>
+            ) : (
+              data.map((item) => <ResultItem item={item} key={item._id} />)
+            )}
+            {/* <ResultItem />
             <ResultItem />
             <ResultItem />
             <ResultItem />
             <ResultItem />
             <ResultItem />
-            <ResultItem />
-            <ResultItem />
+            <ResultItem /> */}
           </div>
         </div>
       </div>
