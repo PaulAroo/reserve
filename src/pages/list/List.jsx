@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
 
@@ -10,33 +10,15 @@ import useFetch from "../../customHooks/useFetch";
 
 function List() {
   const location = useLocation();
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState(location.state.destination);
+  const [date, setDate] = useState(location.state.date);
   const [showDateRange, setShowDateRange] = useState(false);
-  const [options, setOptions] = useState({
-    adults: 1,
-    children: 0,
-    rooms: 1,
-  });
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "option",
-    },
-  ]);
+  const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(999);
 
-  useEffect(() => {
-    if (location.state) {
-      setDestination(location.state.destination);
-      setOptions(location.state.options);
-      setDate(location.state.date);
-    }
-  }, []);
-
-  const { data, loading, reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min}&max=${max}`
+  const { data, loading, reFetch, error } = useFetch(
+    `/hotels?${destination ? `city=${destination}` : ""}&min=${min}&max=${max}`
   );
 
   const handleSearch = () => reFetch();
@@ -142,13 +124,6 @@ function List() {
             ) : (
               data.map((item) => <ResultItem item={item} key={item._id} />)
             )}
-            {/* <ResultItem />
-            <ResultItem />
-            <ResultItem />
-            <ResultItem />
-            <ResultItem />
-            <ResultItem />
-            <ResultItem /> */}
           </div>
         </div>
       </div>

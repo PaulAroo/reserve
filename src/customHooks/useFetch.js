@@ -6,10 +6,8 @@ export default function useFetch(url) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  console.log(0, "called");
-
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       setLoading(true);
       try {
         const response = await axios.get(url);
@@ -18,11 +16,11 @@ export default function useFetch(url) {
         setError(err);
       }
       setLoading(false);
-    }
+    };
     fetchData();
   }, [url]);
 
-  async function reFetch() {
+  const reFetch = async () => {
     setLoading(true);
     try {
       const response = await axios.get(url);
@@ -31,7 +29,6 @@ export default function useFetch(url) {
       setError(err);
     }
     setLoading(false);
-  }
-
+  };
   return { data, loading, error, reFetch };
 }
