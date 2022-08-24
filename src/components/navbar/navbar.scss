@@ -19,6 +19,7 @@
   color: white;
   font-size: 1.5rem;
   font-weight: 700;
+  text-decoration: none;
   .icon {
     color: v.$palatinate-purple;
     width: 2rem;
@@ -32,6 +33,10 @@
 .buttons {
   display: flex;
   gap: 1rem;
+  a {
+    display: flex;
+    text-decoration: none;
+  }
   button {
     border: none;
     border-radius: 4px;

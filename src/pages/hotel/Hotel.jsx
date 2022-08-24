@@ -4,6 +4,11 @@ import "./hotel.scss";
 import { MdLocationPin } from "react-icons/md";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
+import { useLocation } from "react-router-dom";
+import useFetch from "../../customHooks/useFetch";
+import { useContext } from "react";
+import { SearchContext } from "../../context/search-context";
+import { calculateDaysDifference } from "../../utils/days-difference";
 
 const images = [
   {
@@ -27,8 +32,13 @@ const images = [
 ];
 
 function Hotel() {
+  const location = useLocation();
   const [openSlider, setOpenSlider] = useState(false);
   const [sliderNumber, setSliderNumber] = useState(0);
+  const { dates, options } = useContext(SearchContext);
+
+  const id = location.pathname.split("/")[2];
+  const { loading, data, error } = useFetch(`/hotels/find/${id}`);
 
   const handleSlider = (imageIndex) => {
     setOpenSlider(true);
@@ -41,6 +51,11 @@ function Hotel() {
     else if (direction === "R")
       setSliderNumber((prev) => (prev < images.length - 1 ? prev + 1 : 0));
   };
+
+  const noOfNights = calculateDaysDifference(
+    dates[0]?.endDate,
+    dates[0]?.startDate
+  );
 
   return (
     <div className="hotel__page">
@@ -61,45 +76,40 @@ function Hotel() {
         )}
         <div className="hotel__container__header">
           <div className="details">
-            <h1>Watercress Hotels</h1>
+            <h1>{data.name}</h1>
             <div className="location">
-              <MdLocationPin />5 Lorem ipsum dolor sit amet consectetur.
+              <MdLocationPin />
+              {data.address}.
             </div>
           </div>
           <button>Reserve or Book now</button>
         </div>
         <div className="hotel__gallery">
           {images.map((image, index) => (
-            <img src={image.src} onClick={() => handleSlider(index)} />
+            <img
+              key={image.src}
+              src={image.src}
+              onClick={() => handleSlider(index)}
+            />
           ))}
         </div>
         <div className="hotel__details">
           <div className="text">
-            <h1>Stay on the heart of the city</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro
-              debitis quod sint officia, pariatur praesentium natus cum nemo
-              veritatis ea. Veniam labore, esse natus iure quaerat vero totam
-              quisquam rerum nisi, aliquam, expedita quis a non id maxime saepe
-              officia accusamus. Molestias, a quam quis nemo iure impedit
-              eligendi dolore exercitationem enim tenetur ipsa velit possimus
-              quae aspernatur maxime blanditiis eius cum magnam officiis commodi
-              molestiae. Quisquam, inventore blanditiis dolore veritatis facilis
-              nisi modi, corrupti quo in accusantium dicta quibusdam ipsa
-              molestiae ab! Dolor vitae, ut repellendus modi possimus quibusdam
-              nulla vero molestiae pariatur nemo nam voluptas reprehenderit
-              blanditiis deserunt.
-            </p>
+            <h1>{data.title}</h1>
+            <p>{data.desc}</p>
           </div>
           <div className="cta">
-            <h2>perfect for a 9-night stay</h2>
+            <h2>perfect for a {noOfNights}-night stay</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
               consectetur est veniam nobis nam, facilis eius earum officia
               deserunt! Modi.
             </p>
             <p className="price">
-              <strong>$945</strong> (9 nights)
+              <strong>
+                ${noOfNights * options.rooms * data.cheapestPrice}
+              </strong>{" "}
+              {`(${noOfNights} night${noOfNights > 1 ? "s" : ""})`}
             </p>
             <button>Reserve or Book Now!</button>
           </div>

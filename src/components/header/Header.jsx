@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { DateRange } from "react-date-range";
 import { FaRoad, FaRegCalendarAlt } from "react-icons/fa";
 import { BsFillPersonFill, BsChevronExpand } from "react-icons/bs";
@@ -8,12 +8,13 @@ import "./header.scss";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/search-context";
 
 function Header() {
   const navigate = useNavigate();
   const [destination, setDestination] = useState("");
   const [showDateRange, setShowDateRange] = useState(false);
-  const [date, setDate] = useState([
+  const [dates, setDate] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -41,8 +42,13 @@ function Header() {
     }));
   };
 
+  const { dispatch } = useContext(SearchContext);
   const handleSearch = () => {
-    navigate("/hotels", { state: { destination, date, options } });
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: { city: destination, dates, options },
+    });
+    navigate("/hotels", { state: { destination, dates, options } });
   };
 
   return (
@@ -64,8 +70,8 @@ function Header() {
             <FaRegCalendarAlt />
             <span>
               {" "}
-              {format(date[0].startDate, "dd/MM/yyyy")} -{" "}
-              {format(date[0].endDate, "dd/MM/yyyy")}
+              {format(dates[0].startDate, "dd/MM/yyyy")} -{" "}
+              {format(dates[0].endDate, "dd/MM/yyyy")}
             </span>
             {showDateRange && (
               <>
@@ -80,7 +86,7 @@ function Header() {
                   editableDateInputs={true}
                   onChange={(item) => setDate([item.selection])}
                   moveRangeOnFirstSelection={false}
-                  ranges={date}
+                  ranges={dates}
                   className="date__range"
                   minDate={new Date()}
                 />

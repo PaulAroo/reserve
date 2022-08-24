@@ -1,18 +1,21 @@
 import React from "react";
 import { FaHotel } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./navbar.scss";
 
 function Navbar() {
   return (
     <div className="navbar">
       <div className="navbar__container">
-        <span className="logo">
+        <Link to="/" className="logo">
           <FaHotel className="icon" />
           Re<span>serve</span>
-        </span>
+        </Link>
         <div className="buttons">
           <button>Sign Up</button>
-          <button className="login">Login</button>
+          <Link to="/login">
+            <button className="login">Login</button>
+          </Link>
         </div>
       </div>
     </div>

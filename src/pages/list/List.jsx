@@ -10,12 +10,40 @@ import useFetch from "../../customHooks/useFetch";
 
 function List() {
   const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const [destination, setDestination] = useState(
+    location.state?.destination || ""
+  );
+  const [date, setDate] = useState(
+    location.state?.dates || [
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: "option",
+      },
+    ]
+  );
+  const [options, setOptions] = useState(
+    location.state?.options || {
+      adults: 1,
+      children: 0,
+      rooms: 1,
+    }
+  );
   const [showDateRange, setShowDateRange] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(999);
+  // const [options, setOptions] = useState({
+  //   adults: 1,
+  //   children: 0,
+  //   rooms: 1,
+  // });
+  // const [date, setDate] = useState([
+  //   {
+  //     startDate: new Date(),
+  //     endDate: new Date(),
+  //     key: "option",
+  //   },
+  // ]);
 
   const { data, loading, reFetch, error } = useFetch(
     `/hotels?${destination ? `city=${destination}` : ""}&min=${min}&max=${max}`
@@ -96,6 +124,7 @@ function List() {
               <div>
                 <label htmlFor="adult">Adult</label>
                 <input
+                  onChange={() => {}}
                   type="number"
                   min="1"
                   id="adult"
@@ -105,6 +134,7 @@ function List() {
               <div>
                 <label htmlFor="children">Children</label>
                 <input
+                  onChange={() => {}}
                   type="number"
                   min="0"
                   id="children"
@@ -113,7 +143,13 @@ function List() {
               </div>
               <div>
                 <label htmlFor="room">Room</label>
-                <input type="number" min="1" id="room" value={options.rooms} />
+                <input
+                  onChange={() => {}}
+                  type="number"
+                  min="1"
+                  id="room"
+                  value={options.rooms}
+                />
               </div>
             </div>
             <button onClick={handleSearch}>search</button>

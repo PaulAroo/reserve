@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./resultItem.scss";
 
 function ResultItem({ item }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/hotels/${item._id}`);
+  };
   return (
     <div className="result__item">
       <div className="image">
@@ -24,7 +30,7 @@ function ResultItem({ item }) {
         )}
         <span className="price">{item.cheapestPrice}</span>
         <p>including taxes and fees</p>
-        <button>See Availabilty</button>
+        <button onClick={handleClick}>See Availabilty</button>
       </div>
     </div>
   );
