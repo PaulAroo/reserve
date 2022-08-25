@@ -4,11 +4,14 @@ import "./hotel.scss";
 import { MdLocationPin } from "react-icons/md";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
-import { useLocation } from "react-router-dom";
+import { ImCancelCircle } from "react-icons/im";
+import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
 import { useContext } from "react";
 import { SearchContext } from "../../context/search-context";
 import { calculateDaysDifference } from "../../utils/days-difference";
+import { AuthContext } from "../../context/auth-context";
+import BookingModal from "../../components/bookingModal/BookingModal";
 
 const images = [
   {
@@ -32,8 +35,10 @@ const images = [
 ];
 
 function Hotel() {
+  const navigate = useNavigate();
   const location = useLocation();
   const [openSlider, setOpenSlider] = useState(false);
+  const [openBookingModal, setOpenBookingModal] = useState(false);
   const [sliderNumber, setSliderNumber] = useState(0);
   const { dates, options } = useContext(SearchContext);
 
@@ -57,13 +62,19 @@ function Hotel() {
     dates[0]?.startDate
   );
 
+  const { user } = useContext(AuthContext);
+  const handleBooking = () => {
+    if (!user) navigate("/login");
+    else setOpenBookingModal(true);
+  };
+
   return (
     <div className="hotel__page">
       <Navbar />
       <div className="hotel__container">
         {openSlider && (
           <div className="slider">
-            <IoCloseOutline
+            <ImCancelCircle
               className="close"
               onClick={() => setOpenSlider(false)}
             />
@@ -111,9 +122,12 @@ function Hotel() {
               </strong>{" "}
               {`(${noOfNights} night${noOfNights > 1 ? "s" : ""})`}
             </p>
-            <button>Reserve or Book Now!</button>
+            <button onClick={handleBooking}>Reserve or Book Now!</button>
           </div>
         </div>
+        {openBookingModal && (
+          <BookingModal setOpenModal={setOpenBookingModal} />
+        )}
       </div>
     </div>
   );

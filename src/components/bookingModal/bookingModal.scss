@@ -1,0 +1,23 @@
+.bookingModal {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+
+  .blanket {
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .modal_container {
+    width: 400px;
+    height: 400px;
+    background-color: whitesmoke;
+    z-index: 50;
+
+    .close {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  }
+}

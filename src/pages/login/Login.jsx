@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import axios from "../../axios";
+import { AuthContext } from "../../context/auth-context";
 import "./login.scss";
 
 function Login() {
+  const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({
     username: undefined,
     password: undefined,
   });
   const [revealPassword, setRevealPassword] = useState(false);
-  const handleSubmit = (e) => {
+  const { dispatch, loading, error } = useContext(AuthContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userDetails);
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("/auth/login", userDetails);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+    }
   };
 
   const handleChange = (e) => {
@@ -41,7 +55,8 @@ function Login() {
             </span>
           </div>
         </label>
-        <button>Login</button>
+        <button disabled={loading}>Login</button>
+        {error && <p>{error.message}</p>}
       </form>
     </div>
   );

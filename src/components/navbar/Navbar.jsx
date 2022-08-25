@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaHotel } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/auth-context";
 import "./navbar.scss";
 
 function Navbar() {
+  const { user, dispatch } = useContext(AuthContext);
   return (
     <div className="navbar">
       <div className="navbar__container">
@@ -11,12 +13,19 @@ function Navbar() {
           <FaHotel className="icon" />
           Re<span>serve</span>
         </Link>
-        <div className="buttons">
-          <button>Sign Up</button>
-          <Link to="/login">
-            <button className="login">Login</button>
-          </Link>
-        </div>
+        {!user ? (
+          <div className="buttons">
+            <button>Sign Up</button>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+          </div>
+        ) : (
+          <div className="board">
+            <span>{user.username}</span>
+            <button onClick={() => dispatch({ type: "LOGOUT" })}>logout</button>
+          </div>
+        )}
       </div>
     </div>
   );

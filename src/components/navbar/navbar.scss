@@ -49,3 +49,15 @@
     }
   }
 }
+
+.board {
+  color: whitesmoke;
+  text-transform: capitalize;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  button {
+    cursor: pointer;
+  }
+}

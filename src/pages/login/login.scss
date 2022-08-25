@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: grid;
   place-items: center;
+  background: #38384c;
 }
 
 form {
@@ -20,6 +21,9 @@ form {
       padding-right: 2rem;
       padding-left: 0.5rem;
     }
+  }
+  > p {
+    color: red;
   }
 }
 
