@@ -126,7 +126,7 @@ function Hotel() {
           </div>
         </div>
         {openBookingModal && (
-          <BookingModal setOpenModal={setOpenBookingModal} />
+          <BookingModal setOpenModal={setOpenBookingModal} hotelId={id} />
         )}
       </div>
     </div>
