@@ -5,8 +5,6 @@ import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
 import Login from "./pages/login/Login";
 
-// TODO: tweak routes, maybe sketch out nested routes
-
 function App() {
   return (
     <Router>

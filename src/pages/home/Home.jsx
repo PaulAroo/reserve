@@ -1,8 +1,7 @@
-import React from "react";
+import "./home.scss";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import Featured from "../../components/featured/Featured";
-import "./home.scss";
 import FeaturedHotels from "../../components/featuredHotels/FeaturedHotels";
 
 function Home() {

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import useFetch from "../../customHooks/useFetch";
 import "./featuredHotels.scss";
 
@@ -11,27 +13,51 @@ const photos = [
 
 function FeaturedHotels() {
   const { data, error, loading } = useFetch("/hotels?featured=true");
+
+  const slider = document.querySelector(".f_slider");
+
+  const handleScroll = (direction) => {
+    if (direction === "L") slider.scrollLeft -= 500;
+    else if (direction === "R") slider.scrollLeft += 500;
+  };
+
   return (
     <div className="featured_hotels">
-      {loading ? (
-        <div>loading</div>
-      ) : (
-        data.map((item, index) => (
-          <div key={item._id} className="fh__item">
-            <img src={photos[index]} alt={item.name} />
-            <div className="details">
-              <h3>{item.name}</h3>
-              <p>{item.city}</p>
-              <p>Starting from ${item.cheapestPrice}</p>
-              <div className="review">
-                <div>{item.rating}</div>
-                <p>Excellent</p>
-                <span>2,500 reviews</span>
+      <div className="f_left">
+        <BsArrowLeftCircle
+          className="f_arrow"
+          onClick={() => handleScroll("L")}
+        />
+      </div>
+      <div className="f_slider">
+        {loading ? (
+          <div>loading</div>
+        ) : (
+          data.map((item, index) => (
+            <div key={item._id} className="fh__item">
+              <div className="imageWrapper">
+                <img src={item.photos[0]} alt={item.name} />
+              </div>
+              <div className="details">
+                <h3>{item.name}</h3>
+                <p>{item.city}</p>
+                <p>Starting from ${item.cheapestPrice}</p>
+                <div className="review">
+                  <div>{item.rating}</div>
+                  <p>Excellent</p>
+                  <span>2,500 reviews</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))
-      )}
+          ))
+        )}
+      </div>
+      <div className="f_right">
+        <BsArrowRightCircle
+          className="f_arrow"
+          onClick={() => handleScroll("R")}
+        />
+      </div>
     </div>
   );
 }

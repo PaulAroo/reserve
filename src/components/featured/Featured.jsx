@@ -12,7 +12,7 @@ const photos = [
 //TODO browse nice hotel pictures for each location
 function Featured() {
   const { data, error, loading } = useFetch(
-    "/hotels/countByCity?city=lekki,abuja,lagos,ikeja"
+    "/hotels/countByCity?city=lekki,abuja,Lagos,ikeja"
   );
   return loading ? (
     <div>loading</div>
@@ -20,7 +20,9 @@ function Featured() {
     <div className="featured">
       {data.map((city, index) => (
         <div key={city.cityName} className="featured__item">
-          <img src={photos[index]} alt={city.cityName} />
+          <div className="f_imageWrapper">
+            <img src={photos[index]} alt={city.cityName} />
+          </div>
           <div className="titles">
             <h1>{city.cityName}</h1>
             <h2>
