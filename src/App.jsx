@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
 import Login from "./pages/login/Login";
+import SignUp from "./pages/signup/SignUp";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
             <Route index element={<List />} />
             <Route path=":hotelId" element={<Hotel />} />
           </Route>
-          <Route path="/login" element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="sign-up" element={<SignUp />} />
         </Route>
       </Routes>
     </Router>

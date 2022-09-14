@@ -1,0 +1,50 @@
+.rev_signUp {
+  display: flex;
+  height: 100vh;
+
+  > div {
+    flex: 1;
+    width: 50%;
+  }
+
+  //   align-items: center;
+  // justify-content: center;
+
+  // background-image: url("https://res.cloudinary.com/starthrills/image/upload/v1662724107/uploads/k5iuavxwdngrulcqkple.jpg");
+  // background-size: cover;
+  // background-repeat: no-repeat;
+
+  .s_left {
+    background-image: url("https://res.cloudinary.com/starthrills/image/upload/v1662724107/uploads/k5iuavxwdngrulcqkple.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .s_right {
+    display: flex;
+    flex-direction: column;
+
+    .s_form {
+      max-width: 35rem;
+      margin: auto;
+
+      h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      p.errMsg {
+        color: red;
+        text-align: right;
+        font-weight: 200;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .s_logo_wrapper {
+      padding: 1rem;
+      // backdrop-filter: brightness(0.8);
+      backdrop-filter: blur(3px);
+    }
+  }
+}

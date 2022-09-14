@@ -15,7 +15,9 @@ function Navbar() {
         </Link>
         {!user ? (
           <div className="buttons">
-            <button>Sign Up</button>
+            <Link to="/sign-up">
+              <button>Sign Up</button>
+            </Link>
             <Link to="/login">
               <button>Login</button>
             </Link>
