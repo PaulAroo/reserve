@@ -1,42 +1,50 @@
-.login {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: #38384c;
+.rev_login {
+  display: flex;
+  height: 100vh;
 
-  form {
-    padding: 1rem;
-    background: whitesmoke;
-    display: grid;
-    justify-items: center;
-    gap: 1rem;
+  > div {
+    flex: 1;
+    width: 50%;
+  }
 
-    label {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+  .l_left {
+    background-image: url("https://res.cloudinary.com/starthrills/image/upload/v1662724107/uploads/k5iuavxwdngrulcqkple.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
-      input {
-        padding-right: 2rem;
-        padding-left: 0.5rem;
+  .l_right {
+    display: flex;
+    flex-direction: column;
+
+    .l_form {
+      max-width: 25rem;
+      margin: auto;
+      padding-inline: 1rem;
+
+      h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      p.errMsg {
+        color: red;
+        text-align: right;
+        font-weight: 200;
+        margin-bottom: 0.5rem;
       }
     }
-    > p {
-      color: red;
+
+    .l_logo_wrapper {
+      padding: 1rem;
+      // backdrop-filter: brightness(0.8);
+      backdrop-filter: blur(3px);
     }
   }
-}
 
-.pass {
-  position: relative;
-
-  span {
-    cursor: pointer;
-    display: inline-flex;
-    position: absolute;
-    top: 14%;
-    right: 0.8rem;
-    height: fit-content;
-    font-size: 1.3rem;
+  .l_btn {
+    width: 50%;
+    display: flex;
+    margin: 24px auto 16px;
   }
 }

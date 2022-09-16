@@ -1,19 +1,18 @@
-import "./signup.scss";
+import { FaHotel } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../context/auth-context";
 
-import { useEffect, useState } from "react";
+import "./signup.scss";
+import axios from "../../axios";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { FaHotel } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import axios from "../../axios";
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth-context";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -63,7 +62,7 @@ function SignUp() {
         <div className="s_logo_wrapper">
           <Link to="/" className="logo">
             <FaHotel className="icon" />
-            Re<span>serve</span>
+            <span>Reserve</span>
           </Link>
         </div>
         <div className="s_form">
@@ -133,7 +132,7 @@ function SignUp() {
             <Button
               type="submit"
               variant="contained"
-              disabled={valid}
+              disabled={valid || loading}
               sx={{ mt: 3, mb: 2, width: "50%" }}
             >
               Sign Up
