@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
 
@@ -32,18 +32,6 @@ function List() {
   const [showDateRange, setShowDateRange] = useState(false);
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(999);
-  // const [options, setOptions] = useState({
-  //   adults: 1,
-  //   children: 0,
-  //   rooms: 1,
-  // });
-  // const [date, setDate] = useState([
-  //   {
-  //     startDate: new Date(),
-  //     endDate: new Date(),
-  //     key: "option",
-  //   },
-  // ]);
 
   const { data, loading, reFetch, error } = useFetch(
     `/hotels?${destination ? `city=${destination}` : ""}&min=${min}&max=${max}`
