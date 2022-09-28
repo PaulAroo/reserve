@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
 
@@ -7,28 +7,16 @@ import "./list.scss";
 import Navbar from "../../components/navbar/Navbar";
 import ResultItem from "../../components/resultItem/ResultItem";
 import useFetch from "../../customHooks/useFetch";
+import { SearchContext } from "../../context/search-context";
 
 function List() {
   const location = useLocation();
+  const { dates, options: opt } = useContext(SearchContext);
   const [destination, setDestination] = useState(
     location.state?.destination || ""
   );
-  const [date, setDate] = useState(
-    location.state?.dates || [
-      {
-        startDate: new Date(),
-        endDate: new Date(),
-        key: "option",
-      },
-    ]
-  );
-  const [options, setOptions] = useState(
-    location.state?.options || {
-      adults: 1,
-      children: 0,
-      rooms: 1,
-    }
-  );
+  const [date, setDate] = useState(location.state?.dates || dates);
+  const [options, setOptions] = useState(location.state?.options || opt);
   const [showDateRange, setShowDateRange] = useState(false);
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(999);

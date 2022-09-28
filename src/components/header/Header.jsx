@@ -12,21 +12,12 @@ import { SearchContext } from "../../context/search-context";
 
 function Header() {
   const navigate = useNavigate();
+  const { dispatch, dates: datee, options: opt } = useContext(SearchContext);
   const [destination, setDestination] = useState("");
   const [showDateRange, setShowDateRange] = useState(false);
-  const [dates, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  const [dates, setDate] = useState(datee);
   const [showOptions, setShowOptions] = useState(false);
-  const [options, setOptions] = useState({
-    adults: 1,
-    children: 0,
-    rooms: 1,
-  });
+  const [options, setOptions] = useState(opt);
 
   const renderOccupantString = () => {
     const { adults, children, rooms } = options;
@@ -41,8 +32,6 @@ function Header() {
       [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
     }));
   };
-
-  const { dispatch } = useContext(SearchContext);
   const handleSearch = () => {
     dispatch({
       type: "NEW_SEARCH",
