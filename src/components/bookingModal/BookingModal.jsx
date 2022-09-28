@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
-import "./bookingModal.scss";
-import { ImCancelCircle } from "react-icons/im";
-import useFetch from "../../customHooks/useFetch";
-import { SearchContext } from "../../context/search-context";
-import getDatesInRange from "../../utils/gets-dates-range";
 import { useNavigate } from "react-router-dom";
+import { ImCancelCircle } from "react-icons/im";
+import React, { useContext, useState } from "react";
+import { SearchContext } from "../../context/search-context";
+
+import "./bookingModal.scss";
 import axios from "../../axios";
+import useFetch from "../../customHooks/useFetch";
+import getDatesInRange from "../../utils/gets-dates-range";
 
 function BookingModal({ setOpenModal, hotelId }) {
   const navigate = useNavigate();
@@ -48,38 +49,51 @@ function BookingModal({ setOpenModal, hotelId }) {
     }
   };
 
+  const noAvailableRooms = data.length === 0;
+  const noSelectedRooms = selectedRooms.length === 0;
+
   return (
     <div className="bookingModal">
       <div className="blanket" />
       <div className="modal_container">
         <ImCancelCircle className="close" onClick={() => setOpenModal(false)} />
-        <span>Select your rooms</span>
-        {data.map((item) => (
-          <div className="rItem" key={item._id}>
-            <div className="rItemInfo">
-              <div className="rTitle">{item.title}</div>
-              <div className="rDesc">{item.desc}</div>
-              <div className="rMax">
-                Max people: <b>{item.maxPeople}</b>
-              </div>
-              <div className="rPrice">${item.price}</div>
-            </div>
-            <div className="rSelectRooms">
-              {item.roomNumbers.map((roomNumber, index) => (
-                <div className="room" key={index}>
-                  <label>{roomNumber.number}</label>
-                  <input
-                    type="checkbox"
-                    value={roomNumber._id}
-                    onChange={handleSelect}
-                    disabled={!isAvailable(roomNumber)}
-                  />
+        {noAvailableRooms ? (
+          <p>no available rooms</p>
+        ) : (
+          <>
+            <span>Select your rooms</span>
+            {data.map((item) => (
+              <div className="rItem" key={item?._id}>
+                <div className="rItemInfo">
+                  <div className="rTitle">{item?.title}</div>
+                  <div className="rDesc">{item?.desc}</div>
+                  <div className="rMax">
+                    Max people: <b>{item?.maxPeople}</b>
+                  </div>
+                  <div className="rPrice">${item?.price}</div>
                 </div>
-              ))}
-            </div>
-          </div>
-        ))}
-        <button onClick={handleClick} className="rButton">
+                <div className="rSelectRooms">
+                  {item?.roomNumbers.map((roomNumber, index) => (
+                    <div className="room" key={index}>
+                      <label>{roomNumber.number}</label>
+                      <input
+                        type="checkbox"
+                        value={roomNumber._id}
+                        onChange={handleSelect}
+                        disabled={!isAvailable(roomNumber)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+        <button
+          disabled={noSelectedRooms}
+          onClick={handleClick}
+          className="rButton"
+        >
           Reserve Now!
         </button>
       </div>
