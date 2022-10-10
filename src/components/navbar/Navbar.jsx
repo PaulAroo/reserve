@@ -7,7 +7,7 @@ import "./navbar.scss";
 function Navbar() {
   const { user, dispatch } = useContext(AuthContext);
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <div className="navbar__container">
         <Link to="/" className="logo">
           <FaHotel className="icon" />
@@ -29,7 +29,7 @@ function Navbar() {
           </div>
         )}
       </div>
-    </div>
+    </nav>
   );
 }
 
