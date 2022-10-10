@@ -1,38 +1,16 @@
-import React, { useState } from "react";
-import Navbar from "../../components/navbar/Navbar";
-import "./hotel.scss";
 import { MdLocationPin } from "react-icons/md";
-import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
-import { IoCloseOutline } from "react-icons/io5";
 import { ImCancelCircle } from "react-icons/im";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/auth-context";
 import { useLocation, useNavigate } from "react-router-dom";
-import useFetch from "../../customHooks/useFetch";
-import { useContext } from "react";
 import { SearchContext } from "../../context/search-context";
 import { calculateDaysDifference } from "../../utils/days-difference";
-import { AuthContext } from "../../context/auth-context";
-import BookingModal from "../../components/bookingModal/BookingModal";
+import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 
-const images = [
-  {
-    src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
-  },
-  {
-    src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707367.jpg?k=cbacfdeb8404af56a1a94812575d96f6b80f6740fd491d02c6fc3912a16d8757&o=&hp=1",
-  },
-  {
-    src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261708745.jpg?k=1aae4678d645c63e0d90cdae8127b15f1e3232d4739bdf387a6578dc3b14bdfd&o=&hp=1",
-  },
-  {
-    src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707776.jpg?k=054bb3e27c9e58d3bb1110349eb5e6e24dacd53fbb0316b9e2519b2bf3c520ae&o=&hp=1",
-  },
-  {
-    src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261708693.jpg?k=ea210b4fa329fe302eab55dd9818c0571afba2abd2225ca3a36457f9afa74e94&o=&hp=1",
-  },
-  {
-    src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
-  },
-];
+import "./hotel.scss";
+import useFetch from "../../customHooks/useFetch";
+import Navbar from "../../components/navbar/Navbar";
+import BookingModal from "../../components/bookingModal/BookingModal";
 
 function Hotel() {
   const navigate = useNavigate();
@@ -44,6 +22,7 @@ function Hotel() {
 
   const id = location.pathname.split("/")[2];
   const { loading, data, error } = useFetch(`/hotels/find/${id}`);
+  const images = data.photos;
 
   const handleSlider = (imageIndex) => {
     setOpenSlider(true);
@@ -80,7 +59,7 @@ function Hotel() {
             />
             <BsArrowLeftCircle onClick={() => handleScroll("L")} />
             <div className="slider__wrapper">
-              <img src={images[sliderNumber].src} />
+              <img src={images[sliderNumber]} />
             </div>
             <BsArrowRightCircle onClick={() => handleScroll("R")} />
           </div>
@@ -96,12 +75,16 @@ function Hotel() {
           <button>Reserve or Book now</button>
         </div>
         <div className="hotel__gallery">
-          {images.map((image, index) => (
-            <img
-              key={image.src}
-              src={image.src}
-              onClick={() => handleSlider(index)}
-            />
+          {data.photos?.map((image, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                handleSlider(index);
+              }}
+              className="hg_wrapper"
+            >
+              <img src={image} />
+            </div>
           ))}
         </div>
         <div className="hotel__details">

@@ -38,6 +38,12 @@
   }
 }
 
+.slider {
+  .slider__wrapper {
+    width: min(85vw, 1100px);
+  }
+}
+
 .hotel__container__header {
   display: flex;
   align-items: flex-start;
@@ -49,6 +55,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.5rem;
+
+  > .hg_wrapper {
+    display: flex;
+
+    > img {
+      object-fit: cover;
+    }
+  }
 }
 
 .hotel__details {
