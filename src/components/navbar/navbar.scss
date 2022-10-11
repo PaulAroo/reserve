@@ -2,10 +2,12 @@
 
 .navbar {
   padding: 1rem 0.2rem;
-  background-color: v.$blue-violet-crayola;
+  // background-color: v.$blue-violet-crayola;
+  background-color: transparent;
   position: sticky;
   top: 0;
   z-index: 500;
+  transition: all 0.2s ease-in-out;
 }
 .navbar__container {
   display: flex;
@@ -24,12 +26,12 @@
   font-weight: 700;
   text-decoration: none;
   .icon {
-    color: v.$palatinate-purple;
+    color: v.$blue-violet-crayola;
     width: 2rem;
     height: 2rem;
   }
   span {
-    color: v.$palatinate-purple;
+    color: v.$blue-violet-crayola;
   }
 }
 
@@ -63,4 +65,8 @@
   button {
     cursor: pointer;
   }
+}
+
+.navbar_fill {
+  background-color: darkgray;
 }

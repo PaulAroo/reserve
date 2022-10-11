@@ -1,47 +1,45 @@
 @use "../../variables" as v;
 
-.header {
-  background-color: v.$blue-violet-crayola;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-  color: ghostwhite;
-}
-
-.header__container {
-  max-width: 1024px;
-  margin: 0 auto;
-  position: relative;
-  h1 {
-    font-size: 3rem;
-  }
-  > p {
-    font-size: 1.4rem;
-  }
-}
-
 .header__search {
+  width: 100%;
+  max-width: 1024px;
+  margin: -2% auto;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 2rem;
   border-radius: 2rem;
-  position: absolute;
+  position: relative;
+
   color: black;
   background: white;
-  margin: 2rem 0;
-  width: 100%;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+  > button {
+    background-color: v.$blue-violet-crayola;
+    border-radius: 0 2rem 2rem 0;
+    border: none;
+    padding-inline: 1em;
+    color: white;
+  }
+
   > * {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
     user-select: none;
+    padding-block: 1rem;
+
     svg {
-      opacity: 0.2;
+      opacity: 0.5;
       width: 1.5em;
       height: 1.5em;
+      color: v.$blue-violet-crayola;
     }
   }
   .search {
+    padding-left: 1em;
     input {
       border: 0;
       &:is(:active, :focus) {
