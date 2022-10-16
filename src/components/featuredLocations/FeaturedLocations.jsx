@@ -1,4 +1,4 @@
-import "./featured.scss";
+import "./featuredLocations.scss";
 import useFetch from "../../customHooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const photos = [
 ];
 
 //TODO browse nice hotel pictures for each location
-function Featured() {
+function FeaturedLocations() {
   const navigate = useNavigate();
   const { data, error, loading } = useFetch(
     "/hotels/countByCity?city=lekki,abuja,Lagos,ikeja"
@@ -23,26 +23,29 @@ function Featured() {
   return loading ? (
     <div>loading</div>
   ) : (
-    <div className="featured">
-      {data.map((city, index) => (
-        <div
-          key={city.cityName}
-          className="featured__item"
-          onClick={() => handleSearch(city.cityName.toLowerCase())}
-        >
-          <div className="f_imageWrapper">
-            <img src={photos[index]} alt={city.cityName} />
+    <>
+      <h1 className="fl_header">Featured Locations</h1>
+      <div className="featuredL">
+        {data.map((city, index) => (
+          <div
+            key={city.cityName}
+            className="featured__item"
+            onClick={() => handleSearch(city.cityName.toLowerCase())}
+          >
+            <div className="f_imageWrapper">
+              <img src={photos[index]} alt={city.cityName} />
+            </div>
+            <div className="titles">
+              <h1>{city.cityName}</h1>
+              <h2>
+                {city.count} Hotel{city.count > 1 ? "s" : ""}
+              </h2>
+            </div>
           </div>
-          <div className="titles">
-            <h1>{city.cityName}</h1>
-            <h2>
-              {city.count} Hotel{city.count > 1 ? "s" : ""}
-            </h2>
-          </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 }
 
-export default Featured;
+export default FeaturedLocations;

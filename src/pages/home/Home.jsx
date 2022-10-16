@@ -1,6 +1,6 @@
 import "./home.scss";
 import Navbar from "../../components/navbar/Navbar";
-import Featured from "../../components/featured/Featured";
+import FeaturedLocations from "../../components/featuredLocations/FeaturedLocations";
 import SearchBar from "../../components/searchBar/SearchBar";
 import FeaturedHotels from "../../components/featuredHotels/FeaturedHotels";
 
@@ -16,7 +16,7 @@ function Home() {
       </header>
       <SearchBar />
       <main className="home__container">
-        <Featured />
+        <FeaturedLocations />
         <h2>Hotels guests love</h2>
         <FeaturedHotels />
         <div className="newsletter">

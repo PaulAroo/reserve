@@ -1,8 +1,14 @@
-.featured {
+.fl_header {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.featuredL {
   max-width: 1024px;
   margin: 0 auto;
   display: flex;
-  padding-top: 2rem;
   gap: 1.2em;
   width: 100%;
 }
