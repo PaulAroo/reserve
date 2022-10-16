@@ -8,6 +8,15 @@
 
   position: relative;
 
+  &:hover {
+    .f_left,
+    .f_right {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+  }
+
   .f_slider {
     display: flex;
     overflow-x: scroll;
@@ -72,10 +81,9 @@
   &:hover {
     background-color: lightgrey;
   }
-  &:is(:active, :focus) {
-    outline: 1px solid lightblue;
-    border: 1px solid lightblue;
-  }
+  // &:is(:active, :focus) {
+  //   outline: 1px solid lightblue;
+  // }
 }
 
 .f_left,
@@ -84,21 +92,30 @@
   top: 0;
   bottom: 0;
   z-index: 20;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+
+  > button {
+    transition: all 0.3s ease-in;
+  }
 }
 
 .f_left {
   left: -20px;
+  transform: translateX(-20px);
 
   button:active {
-    transform: translateX(-2px);
+    transform: translateX(-4px);
   }
 }
 
 .f_right {
   right: -20px;
+  transform: translateX(20px);
 
   button:active {
-    transform: translateX(2px);
+    transform: translateX(4px);
   }
 }
 

@@ -34,7 +34,7 @@ function FeaturedHotels() {
             </div>
           )}
           <div ref={sliderRef} className="f_slider">
-            {data.map((item, index) => (
+            {data.map((item) => (
               <div
                 key={item._id}
                 className="fh__item"
