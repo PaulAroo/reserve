@@ -24,7 +24,7 @@ function FeaturedLocations() {
     <div>loading</div>
   ) : (
     <>
-      <h1 className="fl_header">Featured Locations</h1>
+      <h2 className="fl_header">Featured Locations</h2>
       <div className="featuredL">
         {data.map((city, index) => (
           <div

@@ -16,11 +16,16 @@
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 
   > button {
-    background-color: v.$blue-violet-crayola;
+    background-color: v.$main_grey;
     border-radius: 0 2rem 2rem 0;
     border: none;
     padding-inline: 1em;
     color: white;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: v.$light_red;
+    }
   }
 
   > * {
@@ -88,8 +93,14 @@
 
       button {
         cursor: pointer;
+        border-radius: 50%;
+        border: none;
+        padding: 0.2em 0.6em;
+        font-weight: 500;
+        background: lightgray;
         &:disabled {
           cursor: not-allowed;
+          background: rgb(239, 239, 239);
         }
       }
 

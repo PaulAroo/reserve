@@ -26,47 +26,45 @@
   font-weight: 700;
   text-decoration: none;
   .icon {
-    color: v.$blue-violet-crayola;
     width: 2rem;
     height: 2rem;
   }
   span {
-    color: v.$blue-violet-crayola;
+    color: v.$light_red;
   }
 }
 
 .buttons {
   display: flex;
   gap: 1rem;
+  color: white;
+  align-items: center;
+  text-transform: capitalize;
   a {
     display: flex;
     text-decoration: none;
   }
   button {
-    border: none;
-    border-radius: 4px;
-    padding-inline: 1rem;
+    background-color: v.$lighter_red;
+    border: 1px solid v.$light_red;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    color: white;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.2s;
+    &:hover {
+      background-color: v.$light_red;
+    }
     &:active {
       background-color: darken(gray, 0.1%);
       transform: translateY(2px);
     }
   }
-}
-
-.board {
-  color: whitesmoke;
-  text-transform: capitalize;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-
-  button {
-    cursor: pointer;
+  span {
+    user-select: none;
   }
 }
 
 .navbar_fill {
-  background-color: darkgray;
+  background-color: v.$main_grey;
 }

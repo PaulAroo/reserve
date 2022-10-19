@@ -17,7 +17,7 @@ function Home() {
       <SearchBar />
       <main className="home__container">
         <FeaturedLocations />
-        <h2>Hotels guests love</h2>
+        <h1>Hotels guests love</h1>
         <FeaturedHotels />
         <div className="newsletter">
           <h2>Save time, save money!</h2>

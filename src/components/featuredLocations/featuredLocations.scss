@@ -23,26 +23,30 @@
   cursor: pointer;
 
   .f_imageWrapper {
-    filter: brightness(0.5);
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      filter: brightness(0.9);
-    }
-
     > img {
       width: 100%;
       object-fit: cover;
       height: 160px;
+      transition: all 0.3s;
     }
   }
 
   .titles {
     position: absolute;
-    bottom: 5%;
-    left: 5%;
+    inset: 0;
     font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     font-weight: 100;
+    padding: 0.5rem;
+    background: linear-gradient(#ffffff00 30%, #000000ad);
+    transition: all 0.3s;
+
+    &:hover {
+      background: linear-gradient(#ffffff00 30%, #000000d5);
+    }
+
     h1 {
       font-size: 1.5em;
       font-weight: 300;

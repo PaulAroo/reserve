@@ -1,3 +1,5 @@
+@use "../../variables" as v;
+
 .featured_hotels {
   cursor: pointer;
   max-width: 1024px;
@@ -75,15 +77,13 @@
   border: none;
   aspect-ratio: 1/1;
   align-items: center;
-  background-color: white;
+  color: white;
+  background-color: v.$lighter_red;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.16);
   transition: all 0.2s ease-out;
   &:hover {
-    background-color: lightgrey;
+    background-color: v.$light_red;
   }
-  // &:is(:active, :focus) {
-  //   outline: 1px solid lightblue;
-  // }
 }
 
 .f_left,

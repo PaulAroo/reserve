@@ -1,6 +1,8 @@
 @use "../../variables" as v;
 
 .home {
+  color: v.$main_grey;
+
   header {
     // background-color: v.$blue-violet-crayola;
     position: relative;
@@ -11,7 +13,7 @@
     color: whitesmoke;
     isolation: isolate;
 
-    margin-top: -4.25rem;
+    margin-top: -5rem;
 
     &::after {
       content: "";
@@ -37,10 +39,11 @@
     flex-direction: column;
     gap: 2rem;
 
-    h2 {
+    > h1 {
       width: 100%;
       margin: 0 auto;
       max-width: 1024px;
+      text-align: center;
     }
   }
 

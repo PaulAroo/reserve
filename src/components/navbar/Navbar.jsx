@@ -19,23 +19,27 @@ function Navbar({ fillNav }) {
       <div className="navbar__container">
         <Link to="/" className="logo">
           <FaHotel className="icon" />
-          Re<span>serve</span>
+          <span>Re</span>serve
         </Link>
-        {!user ? (
-          <div className="buttons">
-            <Link to="/sign-up">
-              <button>Sign Up</button>
-            </Link>
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
-          </div>
-        ) : (
-          <div className="board">
-            <span>{user.username}</span>
-            <button onClick={() => dispatch({ type: "LOGOUT" })}>logout</button>
-          </div>
-        )}
+        <div className="buttons">
+          {!user ? (
+            <>
+              <Link to="/sign-up">
+                <button>Sign Up</button>
+              </Link>
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <span>{user.username}</span>
+              <button onClick={() => dispatch({ type: "LOGOUT" })}>
+                logout
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );
