@@ -8,7 +8,7 @@ import SignUp from "./pages/signup/SignUp";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/reserve">
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
