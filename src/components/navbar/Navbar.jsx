@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth-context";
 import "./navbar.scss";
 
-function Navbar({ fillNav }) {
+function Navbar({ fillNav, colorFill }) {
   const { user, dispatch } = useContext(AuthContext);
   const [fill, setFill] = useState(!!fillNav);
 
@@ -15,7 +15,11 @@ function Navbar({ fillNav }) {
   }
 
   return (
-    <nav className={`navbar ${fill ? "navbar_fill" : ""}`}>
+    <nav
+      className={`navbar${fill ? " navbar_fill" : ""}${
+        colorFill ? " nav-bg-fill" : ""
+      }`}
+    >
       <div className="navbar__container">
         <Link to="/" className="logo">
           <FaHotel className="icon" />

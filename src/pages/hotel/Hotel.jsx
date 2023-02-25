@@ -49,7 +49,7 @@ function Hotel() {
 
   return (
     <div className="hotel__page">
-      <Navbar fillNav={true} />
+      <Navbar colorFill={true} />
       <div className="hotel__container">
         {openSlider && (
           <div className="slider">

@@ -29,7 +29,7 @@ function List() {
 
   return (
     <div className="list">
-      <Navbar fillNav={true} />
+      <Navbar colorFill={true} />
       <div className="list__container">
         <div className="wrapper">
           <div className="search">
