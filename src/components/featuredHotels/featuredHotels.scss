@@ -1,7 +1,6 @@
 @use "../../variables" as v;
 
 .featured_hotels {
-  cursor: pointer;
   max-width: 1024px;
   margin: 0 auto;
   display: flex;
@@ -41,10 +40,57 @@
   display: inline-flex;
   flex-direction: column;
   scroll-snap-align: start;
+
+  border-radius: 20px;
+  box-shadow: 0 1px 13.5px 1.5px rgb(46 49 108 / 8%);
+  margin-bottom: 30px;
+
   .details {
+    padding: 1.3rem;
+    .d_city {
+      color: v.$light_red;
+      text-transform: capitalize;
+    }
+
+    > h2 {
+      margin-top: 0.3rem;
+      margin-bottom: 0.6rem;
+      transition: all 0.2s;
+      &:hover {
+        cursor: pointer;
+        color: v.$light_red;
+      }
+    }
     .review {
       display: flex;
-      gap: 0.5rem;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 300;
+      color: black;
+
+      > div {
+        border-left: 1px solid lightgray;
+        padding-inline: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        > svg {
+          font-size: 1.3rem;
+          color: v.$light_red;
+        }
+      }
+
+      > p {
+        font-size: 1.45rem;
+        font-weight: 400;
+
+        > span {
+          font-size: 0.8rem;
+          color: black;
+          font-weight: 200;
+        }
+      }
     }
   }
 }
@@ -54,7 +100,9 @@
   height: 15rem;
   display: flex;
   overflow: hidden;
-  cursor: pointer;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 
   > img {
     object-fit: cover;
@@ -63,7 +111,7 @@
 
   &:hover {
     > img {
-      transform: scale(1.05);
+      transform: scale(1.15);
     }
   }
 }

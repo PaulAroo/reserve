@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdArrowRight, MdArrowLeft } from "react-icons/md";
+import { MdArrowRight, MdArrowLeft, MdStar } from "react-icons/md";
 
 import "./featuredHotels.scss";
 import useFetch from "../../customHooks/useFetch";
@@ -15,6 +15,10 @@ function FeaturedHotels() {
     if (direction === "L") slider.scrollLeft -= 500;
     else if (direction === "R") slider.scrollLeft += 500;
   };
+
+  if (!!error) {
+    return <span style={{ color: "red" }}>something went wrong</span>;
+  }
 
   const handleItemClick = (id) => {
     navigate(`/hotels/${id}`);
@@ -44,13 +48,16 @@ function FeaturedHotels() {
                   <img src={item.photos[0]} alt={item.name} />
                 </div>
                 <div className="details">
-                  <h3>{item.name}</h3>
-                  <p>{item.city}</p>
-                  <p>Starting from ${item.cheapestPrice}</p>
+                  <p className="d_city">{item.city}</p>
+                  <h2>{item.name}</h2>
                   <div className="review">
-                    <div>{item.rating}</div>
-                    <p>Excellent</p>
-                    <span>2,500 reviews</span>
+                    <p>
+                      ${item.cheapestPrice} <span>/ Night</span>
+                    </p>
+                    <div>
+                      <MdStar />
+                      <span>{item.rating}</span>
+                    </div>
                   </div>
                 </div>
               </div>

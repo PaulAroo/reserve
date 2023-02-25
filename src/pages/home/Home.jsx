@@ -26,10 +26,6 @@ function Home() {
             <input type="email" placeholder="Your email" />
             <button>Subscribe</button>
           </div>
-          <label htmlFor="free">
-            <input type="checkbox" name="book" id="free" />
-            Send me a link to get the FREE Booking.com app!
-          </label>
         </div>
       </main>
     </div>
