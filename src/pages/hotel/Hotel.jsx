@@ -20,6 +20,13 @@ function Hotel() {
   const [sliderNumber, setSliderNumber] = useState(0);
   const { dates, options } = useContext(SearchContext);
 
+	useEffect(() => {
+		document.addEventListener("keydown", handleKeyPress)
+		return () => {
+			document.removeEventListener("keydown", handleKeyPress)
+		}
+	}, [])
+
   const id = location.pathname.split("/")[2];
   const { loading, data, error } = useFetch(`/hotels/find/${id}`);
   const images = data.photos;
@@ -56,15 +63,11 @@ function Hotel() {
 			case "ArrowLeft":
 				handleScroll("L")
 				break;
+			case "Escape":
+				setOpenSlider(false)
+				break;
 		}
 	}
-
-	useEffect(() => {
-		document.addEventListener("keydown", handleKeyPress)
-		return () => {
-			document.removeEventListener("keydown", handleKeyPress)
-		}
-	}, [])
 
   return (
     <div className="hotel__page">
