@@ -1,6 +1,6 @@
 import { MdLocationPin } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth-context";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/search-context";
@@ -46,6 +46,25 @@ function Hotel() {
     if (!user) navigate("/login");
     else setOpenBookingModal(true);
   };
+
+	const handleKeyPress = (e) => {
+		const keyPressed = e.key
+		switch (keyPressed) {
+			case "ArrowRight":
+				handleScroll("R")
+				break;
+			case "ArrowLeft":
+				handleScroll("L")
+				break;
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener("keydown", handleKeyPress)
+		return () => {
+			document.removeEventListener("keydown", handleKeyPress)
+		}
+	}, [])
 
   return (
     <div className="hotel__page">
