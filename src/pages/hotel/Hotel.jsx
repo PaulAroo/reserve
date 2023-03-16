@@ -21,11 +21,13 @@ function Hotel() {
   const { dates, options } = useContext(SearchContext);
 
 	useEffect(() => {
-		document.addEventListener("keydown", handleKeyPress)
-		return () => {
-			document.removeEventListener("keydown", handleKeyPress)
+		if(openSlider) {
+			document.addEventListener("keydown", handleKeyPress)
+			return () => {
+				document.removeEventListener("keydown", handleKeyPress)
+			}
 		}
-	}, [])
+	}, [openSlider])
 
   const id = location.pathname.split("/")[2];
   const { loading, data, error } = useFetch(`/hotels/find/${id}`);
@@ -54,7 +56,7 @@ function Hotel() {
     else setOpenBookingModal(true);
   };
 
-	const handleKeyPress = (e) => {
+	function handleKeyPress(e) {
 		const keyPressed = e.key
 		switch (keyPressed) {
 			case "ArrowRight":
