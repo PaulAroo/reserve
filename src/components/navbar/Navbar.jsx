@@ -1,14 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaHotel } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth-context";
+
 import "./navbar.scss";
 
 function Navbar({ fillNav, colorFill }) {
   const { user, dispatch } = useContext(AuthContext);
   const [fill, setFill] = useState(!!fillNav);
 
-  window.addEventListener("scroll", handleScroll);
+	window.addEventListener("scroll", handleScroll);
 
   function handleScroll() {
     window.scrollY > 150 ? setFill(true) : setFill(false);

@@ -1,13 +1,14 @@
 import { format } from "date-fns";
 import { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
+import { useLocation } from "react-router-dom";
+import { SearchContext } from "../../context/search-context";
 
 import "./list.scss";
+import useFetch from "../../customHooks/useFetch";
+import SearchIcon from '@mui/icons-material/Search';
 import Navbar from "../../components/navbar/Navbar";
 import ResultItem from "../../components/resultItem/ResultItem";
-import useFetch from "../../customHooks/useFetch";
-import { SearchContext } from "../../context/search-context";
 
 function List() {
   const location = useLocation();
@@ -33,7 +34,7 @@ function List() {
       <div className="list__container">
         <div className="wrapper">
           <div className="search">
-            <header>Search</header>
+            <header>Filter <SearchIcon /> </header>
             <label htmlFor="destination">
               Destination
               <input
@@ -128,7 +129,9 @@ function List() {
                 />
               </div>
             </div>
-            <button onClick={handleSearch}>search</button>
+            <button onClick={handleSearch}>
+							 search
+							</button>
           </div>
           <div className="results">
             {loading ? (

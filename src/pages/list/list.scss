@@ -1,7 +1,6 @@
 @use "../../variables" as v;
 
 .list__container {
-  border: 1px solid;
   padding: 2rem 0;
 
   .wrapper {
@@ -12,26 +11,42 @@
     position: relative;
 
     .search {
-      border: 1px solid v.$dark-sky-blue;
+			box-shadow: 0px 4px 12px 0px #e6e6e6;
       border-radius: 8px;
       flex: 0.3;
       display: grid;
       gap: 1rem;
-      padding: 0.5rem;
       height: fit-content;
       position: sticky;
-      top: 20px;
-      // background-color: v.$blue-violet-crayola;
+      top: 85px;
+
+			> header {
+				background-color: #fc4c4b;
+				color: white;
+				padding: 0.2em 0.6em;
+				border-radius: 8px 8px 0 0;
+
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				
+				> svg {
+					width: 0.8em;
+					height: 0.8em;
+				}
+			}
 
       > label {
         display: flex;
         flex-direction: column;
+				padding-inline: 0.5em;
       }
 
       .ckeckIn {
         display: flex;
         flex-direction: column;
         position: relative;
+				padding-inline: 0.5em;
 
         > span {
           border: 1px solid;
@@ -51,6 +66,12 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+				padding-inline: 0.5em;
+
+				> p {
+					border-bottom: 1px solid #cecece;
+					padding: 0.2em 0;
+				}
 
         > div {
           display: flex;
@@ -62,11 +83,15 @@
           }
         }
       }
+
+			> button {
+				justify-self: center;
+				margin-bottom: 0.7em;
+			}
     }
 
     .results {
       flex: 0.7;
-      // background-color: v.$dark-sky-blue;
       display: grid;
       gap: 1rem;
     }
